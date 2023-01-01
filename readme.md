@@ -11,3 +11,7 @@ $ npm install mysql2 [this is working]
 create database tripplanner;
 
 GRANT ALL PRIVILEGES ON tripplanner.* TO 'apu'@'localhost';
+
+For ORM in javascript need to use sequalize:
+$ npm install sequelize --save
+$ npm install cors --save [need to understand the usage deeply]
