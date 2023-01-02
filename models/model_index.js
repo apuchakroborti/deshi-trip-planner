@@ -1,8 +1,8 @@
 import {dbConfig} from '../config/dbConfig.js';
 
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize} from 'sequelize';
 
-const sequelize = new Sequelize (
+export const sequelize = new Sequelize (
     dbConfig.DB,
     dbConfig.USER,
     dbConfig.PASSWORD, {
@@ -27,21 +27,12 @@ sequelize.authenticate()
     console.log('Error'+err);
 })
 
-const db = {}
+export const db = {}
 
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-// TODO need to understand this properly
-db.places = require('./placeModel.js')(sequelize, DataTypes);
-db.reviews = require('./reviewModel.js')(sequelize, DataTypes);
-
-// if the force is true then models will be created again and again
-// if false then it will not create model again and again
 db.sequelize.sync({force: false})
 .then(()=>{
     console.log('yes re-sync done!');
 });
-
-// module.exports = db
-export default db

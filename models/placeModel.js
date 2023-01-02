@@ -1,36 +1,31 @@
-// const { Sequelize, DataTypes } = require("sequelize");
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize} from 'sequelize';
 
-// module.exports = (sequelize, DataTypes) => {
-export const place = (Sequelize, DataTypes) => {
+import {sequelize} from '../models/model_index.js';
 
-    const Place = Sequelize.define("place", {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        country: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        district: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        details: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        views: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        status: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        }
+export const Place = sequelize.define("place", {
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    country: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    district: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    details: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    views: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    },
+    status: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true
+    }
 
-    });
-    return Place;
-
-}
+});

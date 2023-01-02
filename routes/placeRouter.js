@@ -1,15 +1,18 @@
 import express from 'express';
 
-import {placeController} from '../controllers/placeController.js';
+import { addPlace,
+    getAllPlaces,
+    getOnePlace,
+    updatePlace,
+    deletePlace,
+    getAllByCountryName} from '../controllers/placeController.js';
 
-const router = express.Router();
+export const router = express.Router();
 
-router.post('/addPlace', placeController.addPlace);
-router.get('/getAllPlaces', placeController.getAllPlaces);
-router.get('/:id', placeController.getOnePlace);
-router.get('/getAllPlacesByCountryName', placeController.getAllByCountryName);
-router.put(':id', placeController.updatePlace);
-router.delete('/:id', placeController.deletePlace);
+router.post('/addPlace', addPlace);
+router.get('/getAllPlaces', getAllPlaces);
+router.get('/getAllPlaces/:id', getOnePlace);
+router.post('/getAllPlacesByCountryName', getAllByCountryName);
+router.put('/:id', updatePlace);
+router.delete('/:id', deletePlace);
 
-// module.exports = router
-export default router;

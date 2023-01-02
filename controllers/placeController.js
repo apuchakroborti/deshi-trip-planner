@@ -1,8 +1,7 @@
 // const db = require('../models');
 import {db} from '../models/model_index.js';
 
-// create main Model
-const Place = db.Place;
+import {Place} from '../models/placeModel.js';
 
 // main work
 
@@ -16,6 +15,7 @@ const addPlace = async (req, res) => {
         views: req.body.views,
         status: true
     }
+    // const place = await Place.create(info);
     const place = await Place.create(info);
     res.status(201).send(place);
     console.log(place);
@@ -51,7 +51,14 @@ const getOnePlace = async (req, res) => {
 const updatePlace = async (req, res) => {
     
     let id = req.params.id;
-    const place = await Place.update({where: {id: id}});
+    console.log(`Updating place by id: ${id}`);
+
+    let place = await Place.findOne({where: {id: id}});
+    if(place==undefined || place==null){
+            res.send("User not found!");
+    }else{
+        place = await place.update(req.body);
+    }
     res.status(200).send(place);
 
     console.log(place);
@@ -72,7 +79,8 @@ const deletePlace = async (req, res) => {
 // 6. findPlaces by country name
 const getAllByCountryName = async (req, res) => {
     
-    let countryName = req.params.country;
+    let countryName = req.body.country;
+    console.log(`countryName: ${countryName}`);
     let places = await Place.findAll({where: {country: countryName}});
     
     res.status(200).send(places);
@@ -80,7 +88,7 @@ const getAllByCountryName = async (req, res) => {
     console.log(places);
 }
 
-module.exports = {
+export {
     addPlace,
     getAllPlaces,
     getOnePlace,
